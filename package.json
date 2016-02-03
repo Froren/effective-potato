@@ -1,0 +1,24 @@
+{
+  "name": "effective-potato",
+  "version": "1.0.0",
+  "description": "",
+  "main": "play.js",
+  "dependencies": {
+    "mocha": "^2.4.5",
+    "should": "^8.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha binions/tests/*_test.js && mocha hoyle/tests/*_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Froren/effective-potato.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Froren/effective-potato/issues"
+  },
+  "homepage": "https://github.com/Froren/effective-potato#readme"
+}
