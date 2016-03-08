@@ -1,0 +1,17 @@
+<html>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+
+  socket.on('m', function(data) {
+  	document.getElementById('i').innerHTML += data + "<br>";
+  	console.log(data);
+  });
+
+  function emit() {
+  	socket.emit('a', "event!");
+  }
+</script>
+<button onclick='emit()'>Emit something</button>
+<div id='i'></div>
+</html>
