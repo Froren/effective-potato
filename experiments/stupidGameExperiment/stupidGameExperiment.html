@@ -1,0 +1,12 @@
+<html>
+<script src="/public/poker.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+
+  socket.on('m', function(data) {
+  	document.getElementById('r').innerHTML = data;
+  });
+</script>
+<div id='r'></div>
+</html>

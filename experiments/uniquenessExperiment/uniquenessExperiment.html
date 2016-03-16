@@ -6,17 +6,17 @@
   
   function render(cards) {
 	
-	var htmlString = "";
-	for(var prop in cards) {
+  	var htmlString = "";
+  	for(var prop in cards) {
 
-		var socketCards = "";
-		cards[prop].forEach(function (c, i) {
-			socketCards += convertStringToImg(c);
-		});
-		htmlString += prop + ": " + socketCards + "<br>";
-	}
-	
-	return htmlString;
+  		var socketCards = "";
+  		cards[prop].forEach(function (c, i) {
+  			socketCards += convertStringToImg(c);
+  		});
+  		htmlString += prop + ": " + socketCards + "<br>";
+  	}
+  	
+  	return htmlString;
   };
 
   function convertStringToImg(cardString, size) {
@@ -83,6 +83,6 @@
 </script>
 <button onclick='emit()'>Draw</button>
 <button onclick='_clear()'>Clear</button>
-<div id='i'> You name is: <span id='name'></span></div><br>
+<div id='i'> Your name is: <span id='name'></span></div><br>
 <div id='r'></div>
 </html>
