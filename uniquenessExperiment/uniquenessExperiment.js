@@ -49,7 +49,7 @@ function drawCard(socketId) {
 	}
 
 	if (cards.length > 0) {
-		var draw = cards.splice(Math.floor(Math.random() * cards.length), 1);
+		var draw = cards.splice(Math.floor(Math.random() * cards.length), 1)[0];
 		map[socketId].push(draw);
 		filteredMap[socketId].push('X');
 		drawn.push(draw);

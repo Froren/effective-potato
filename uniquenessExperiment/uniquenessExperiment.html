@@ -11,14 +11,54 @@
 
 		var socketCards = "";
 		cards[prop].forEach(function (c, i) {
-			socketCards += (i === cards[prop].length-1) ? c : c + " ";
+			socketCards += convertStringToImg(c);
 		});
-
 		htmlString += prop + ": " + socketCards + "<br>";
 	}
 	
 	return htmlString;
   };
+
+  function convertStringToImg(cardString, size) {
+
+  	if (!size) 
+  		size = 40;
+
+  	cardString = cardString.toUpperCase();
+
+  	if (cardString === 'X')
+  		return Poker.getBackImage(size, '#90928C', '#535550').outerHTML;
+  	else {
+  		var value = cardString.charAt(0);
+  		var suit = cardString.charAt(1);
+
+  		var outputV, outputS;
+
+  		if (value === '1') 
+  			outputV = 'A';
+  		else if (value === 'T')
+  			outputV = '10';
+  		else
+  			outputV = value;
+
+  		switch (suit) {
+  			case 'D':
+  				outputS = 'diamonds';
+  				break;
+  			case 'C':
+  				outputS = 'clubs';
+  				break;
+  			case 'H':
+  				outputS = 'hearts';
+  				break;
+  			case 'S':
+  				outputS = 'spades';
+  				break;
+  		}
+
+  		return Poker.getCardImage(size, outputS, outputV).outerHTML;
+  	}
+  }
 
   socket.on('m', function(data) {
   	document.getElementById('r').innerHTML = render(data);
@@ -39,7 +79,6 @@
   //using 'clear()' gave me errors. Maybe it's overridden by socket libs.
   function _clear() {
   	socket.emit('clear');
-  	document.getElementById('w').innerHTML = "";
   };
 </script>
 <button onclick='emit()'>Draw</button>
