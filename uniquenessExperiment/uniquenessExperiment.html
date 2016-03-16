@@ -1,0 +1,49 @@
+<html>
+<script src="/public/poker.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+  
+  function render(cards) {
+	
+	var htmlString = "";
+	for(var prop in cards) {
+
+		var socketCards = "";
+		cards[prop].forEach(function (c, i) {
+			socketCards += (i === cards[prop].length-1) ? c : c + " ";
+		});
+
+		htmlString += prop + ": " + socketCards + "<br>";
+	}
+	
+	return htmlString;
+  };
+
+  socket.on('m', function(data) {
+  	document.getElementById('r').innerHTML = render(data);
+  });
+
+  socket.on('n', function(data) {
+  	document.getElementById('name').innerHTML = data;
+  });
+
+  socket.on('w', function(data) {
+  	alert(data);
+  });
+
+  function emit() {
+  	socket.emit('draw');
+  };
+
+  //using 'clear()' gave me errors. Maybe it's overridden by socket libs.
+  function _clear() {
+  	socket.emit('clear');
+  	document.getElementById('w').innerHTML = "";
+  };
+</script>
+<button onclick='emit()'>Draw</button>
+<button onclick='_clear()'>Clear</button>
+<div id='i'> You name is: <span id='name'></span></div><br>
+<div id='r'></div>
+</html>
