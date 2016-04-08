@@ -4,9 +4,22 @@
 <script>
 	var socket = io();
 
-	socket.on('m', function(data) {
-		document.getElementById('r').innerHTML += data + '<br>';
+	socket.on('id', function(data) {
+		document.getElementById('id').innerHTML = data;
 	});
+
+	socket.on('s', function(data) {
+		document.getElementById('game').innerHTML = JSON.stringify(data);
+	});
+
+	function emit() {
+		var trimmed = document.getElementById('input').innerHTML.trim();
+  		socket.emit('input', trimmed);
+  		document.getElementById('input').innerHTML = "";
+  	}
 </script>
-<div id='r'></div>
+<div id='id'></div>
+<div id='game'></div>
+<input id='input' type="text">
+<button id='submit' onclick='emit()'>submit</button>
 </html>

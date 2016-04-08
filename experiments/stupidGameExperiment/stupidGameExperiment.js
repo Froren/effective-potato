@@ -21,14 +21,27 @@ app.get('/', function(req, res) {
 	res.render('stupidGameExperiment.html');
 });
 
-io.on('connection', function(socket) {
-	console.log("First");
-	socket.emit("m", "Pikachu!");
-});
+var game = {state: "start", object:{}};
 
 io.on('connection', function(socket) {
-	console.log("Second");
-	socket.emit("m", "I choose you!");
+	
+	//When first connected, tell the socket about the current game state.
+		//The client should be able to render based on that.
+	socket.emit('s', game);
+	socket.emit('id', socket.id);
+	
+	/*
+		We can structure a game object to be created on a per room basis,
+		that acts as a state machine for the state of the room.
+
+		The object can be changed using a specific interface of getters and setters,
+		which will be linked to events that trigger as different players modify the object.
+
+		When the socket joins the object, it can be linked using something like:
+			game.on('changeState', function(data) {socket.emit})
+				in a more fine tuned way. 
+			(We'll also need to block out information using the filteredMap on emit)
+	*/
 });
 
 /*
